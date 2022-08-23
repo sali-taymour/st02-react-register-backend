@@ -5,7 +5,7 @@ export const getUsers = (): IUser[] => {
             username: "anonymousUser",
             firstName: "Anonymous",
             lastName: "User",
-            accessGroups: ["loggedOutUsers"],
+            accessGroups: ["loggedOutUsers,members"],
         },
         {
             username: "hd",
