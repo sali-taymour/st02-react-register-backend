@@ -21,13 +21,7 @@ const users = getUsers();
 const loginSecondsMax = 10;
 
 app.use(cookieParser());
-app.use(
-    session({
-        resave: true,
-        saveUninitialized: true,
-        secret: "tempsecret",
-    })
-);
+
 app.use(express.json());
 app.use(
     cors({
