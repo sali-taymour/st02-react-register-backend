@@ -41,11 +41,11 @@ app.use(
     session({
         resave: true,
         saveUninitialized: true,
-        secret: "tempsecret",
+        secret: process.env.SESSION_SECRET,
         cookie: {
             httpOnly: true,
-            sameSite: "lax",
-            secure: false,
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            secure: process.env.NODE_ENV === "production",
         },
     })
 );
@@ -90,15 +90,21 @@ const logUserIn = (
         logAnonymousUserIn(req, res);
     }
 };
+app.get("/", (req: express.Request, res: express.Response) => {
+    res.send(`***${process.env.NODE_ENV}***`);
+});
 
 app.get("/", (req: express.Request, res: express.Response) => {
     res.send(users);
 });
+app.set('trust proxy', 1);
+ 
+origin: process.env.FRONTEND_BASE_URL,
 
-app.post("/login", (req: express.Request, res: express.Response) => {
-    const username = req.body.username;
-    logUserIn(username, req, res);
-});
+    app.post("/login", (req: express.Request, res: express.Response) => {
+        const username = req.body.username;
+        logUserIn(username, req, res);
+    });
 
 app.get("/current-user", (req: express.Request, res: express.Response) => {
     const user = req.session.user;
@@ -110,6 +116,7 @@ app.get("/current-user", (req: express.Request, res: express.Response) => {
         logAnonymousUserIn(req, res);
     }
 });
+
 
 app.get("/logout", (req: express.Request, res: express.Response) => {
     logAnonymousUserIn(req, res);
