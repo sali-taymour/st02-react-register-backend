@@ -94,9 +94,7 @@ app.get("/", (req: express.Request, res: express.Response) => {
     res.send(`***${process.env.NODE_ENV}***`);
 });
 
-app.get("/", (req: express.Request, res: express.Response) => {
-    res.send(users);
-});
+
 app.set('trust proxy', 1);
  
 origin: process.env.FRONTEND_BASE_URL,
