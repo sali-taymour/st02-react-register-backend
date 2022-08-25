@@ -31,7 +31,7 @@ app.use(
 app.use(express.json());
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin:  process.env.FRONTEND_BASE_URL,
         methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
         credentials: true,
     })
@@ -51,7 +51,7 @@ app.use(
 );
 
 app.all("/", function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+    res.header("Access-Control-Allow-Origin", process.env.FRONTEND_BASE_URL);
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next();
 });
