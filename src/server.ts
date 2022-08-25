@@ -1,10 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import { getUsers } from "./models.js";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 
-import cors from "cors";
+dotenv.config();
 
 declare module "express-session" {
     export interface SessionData {
@@ -12,7 +13,6 @@ declare module "express-session" {
     }
 }
 
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3049;
@@ -20,6 +20,7 @@ const PORT = process.env.PORT || 3049;
 const users = getUsers();
 const loginSecondsMax = 10;
 
+app.use(cookieParser());
 app.use(
     session({
         resave: true,
@@ -27,10 +28,33 @@ app.use(
         secret: "tempsecret",
     })
 );
-app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
+app.use(
+    cors({
+        origin: "http://localhost:3000",
+        methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+        credentials: true,
+    })
+);
 
+app.use(
+    session({
+        resave: true,
+        saveUninitialized: true,
+        secret: "tempsecret",
+        cookie: {
+            httpOnly: true,
+            sameSite: "lax",
+            secure: false,
+        },
+    })
+);
+
+app.all("/", function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 const logAnonymousUserIn = (req: express.Request, res: express.Response) => {
     const user = users.find((user) => user.username === "anonymousUser");
     if (user) {
