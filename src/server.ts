@@ -16,7 +16,7 @@ dotenv.config();
 mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
-const PORT = process.env.PORT || 3047;
+const PORT = process.env.PORT || 3049;
 
 const loginSecondsMax = 10;
 
