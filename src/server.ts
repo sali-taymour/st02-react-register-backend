@@ -16,11 +16,9 @@ dotenv.config();
 mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
-const PORT = process.env.PORT || 3049;
+const PORT = process.env.PORT || 3047;
 
 const loginSecondsMax = 10;
-
-app.use(cookieParser());
 
 app.use(express.json());
 app.use(
@@ -30,7 +28,7 @@ app.use(
         credentials: true,
     })
 );
-
+app.use(cookieParser());
 app.use(
     session({
         resave: true,
@@ -45,7 +43,7 @@ app.use(
 );
 app.set("trust proxy", 1);
 
-app.all("/", function (req, res, next) {
+app.all("/", (req, res, next) => {
     res.header("Access-Control-Allow-Origin", process.env.FRONTEND_BASE_URL);
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next();
