@@ -6,7 +6,15 @@ import { User } from "./models/User.js";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import bcrypt from "bcrypt";
+import { createTransport } from "nodemailer";
 
+var transporter = createTransport({
+    service: "gmail",
+    auth: {
+        user: "gmailAccountName",
+        pass: process.env.PASSWORD,
+    },
+});
 declare module "express-session" {
     export interface SessionData {
         user: { [key: string]: any };
