@@ -17,7 +17,8 @@ POST {{url}}/login
 content-type: application/json
  
 {
-    "username": "an"
+    "username": "an",
+    "password": "an123"
 }
 
 ### GET CURRENT USER

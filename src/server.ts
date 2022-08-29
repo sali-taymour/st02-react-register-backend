@@ -75,6 +75,7 @@ const logUserIn = async (
 ) => {
     const user = await User.findOne({ username });
     if (user) {
+        console.log(password , user)
         const passwordIsCorrect = await bcrypt.compare(password, user.hash);
         if (passwordIsCorrect) {
             req.session.user = user;
