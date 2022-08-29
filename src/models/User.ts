@@ -6,6 +6,8 @@ const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     accessGroups: [String],
+    email: String,
+    confirmationCode: String,
 });
 
 export const User = mongoose.model("user", userSchema);
