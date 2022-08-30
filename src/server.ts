@@ -206,7 +206,7 @@ app.post('/register', ensureSafeOrigin, async (req: express.Request, res: expres
 		}
 	}
 	catch (e) {
-		res.status(500).send('no access');
+		res.status(500).send(e);
 	}
 });
 
