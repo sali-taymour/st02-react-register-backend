@@ -129,7 +129,7 @@ app.post('/login', ensureSafeOrigin, (req: express.Request, res: express.Respons
 });
 
 app.post('/register', ensureSafeOrigin, async (req: express.Request, res: express.Response) => {
-	try {
+	// try {
 		const username = req.body.username;
 		const password = req.body.password;
 		const firstName = req.body.firstName;
@@ -204,10 +204,10 @@ app.post('/register', ensureSafeOrigin, async (req: express.Request, res: expres
 		} else {
 			res.send({ message: 'failed validation', errors });
 		}
-	}
-	catch (e) {
-		res.status(500).send(e);
-	}
+	// }
+	// catch (e) {
+	// 	res.status(500).send(e);
+	// }
 });
 
 app.get('/current-user', (req: express.Request, res: express.Response) => {
