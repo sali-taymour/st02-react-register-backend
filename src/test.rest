@@ -9,7 +9,8 @@ content-type: application/json
 
 {
 	"username": "hd",
-    "password": "hd123"
+    "password": "hd123",
+     "safeOriginCode":"4813364",
 }
 
 ### LOGIN ANDREA
@@ -26,3 +27,17 @@ content-type: application/json
 
 ### LOGOUT GET
 {{url}}/logout
+
+
+### REGISTER
+POST {{url}}/register
+content-type: application/json
+ 
+{
+    "username": "an",
+    "firstName" : "sa",
+    "lastName" : "sa",
+    "password": "an123",
+    "safeOriginCode":"4813364",
+    "email": "sali.taymour@gmail.com"
+}
