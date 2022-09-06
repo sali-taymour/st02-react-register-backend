@@ -62,7 +62,7 @@ app.all('/', function (req, res, next) {
 
 
 app.get('/', (req: express.Request, res: express.Response) => {
-	res.status(500).send('no access 222');
+	res.status(500).send('no access 333');
 });
 
 const ensureSafeOrigin = (req: express.Request, res: express.Response, next: express.NextFunction) => {
