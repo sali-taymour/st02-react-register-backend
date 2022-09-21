@@ -30,18 +30,14 @@ const app = express();
 const PORT = process.env.PORT || 3049;
 
 app.use(express.json());
-// app.use(
-// 	cors(
-// 		{
-// 		origin: process.env.FRONTEND_BASE_URL,
-// 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
-// 		credentials: true
-// 	}
-// 	)
-// );
- cors();
-app.use(cors());
-// app.set('trust proxy', 1);
+app.use(
+	cors({
+		origin: process.env.FRONTEND_BASE_URL,
+		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+		credentials: true
+	})
+);
+app.set('trust proxy', 1);
 
 app.use(cookieParser());
 
@@ -58,11 +54,11 @@ app.use(
 	})
 );
 
-// app.all('/', function (req, res, next) {
-// 	res.header("Access-Control-Allow-Origin", process.env.FRONTEND_BASE_URL);
-// 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-// 	next();
-// });
+app.all('/', function (req, res, next) {
+	res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	next();
+});
 
 
 app.get('/', (req: express.Request, res: express.Response) => {
