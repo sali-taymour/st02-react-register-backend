@@ -1,4 +1,4 @@
-@url = http://localhost:3049
+@url = https://l-r-backend.saly-art.de
 
 ### BASE ROUTE
 {{url}}
@@ -10,7 +10,7 @@ content-type: application/json
 {
 	"username": "hd",
     "password": "hd123",
-     "safeOriginCode":"4813364",
+     "safeOriginCode":"4813364"
 }
 
 ### LOGIN ANDREA
@@ -19,7 +19,8 @@ content-type: application/json
  
 {
     "username": "an",
-    "password": "an123"
+    "password": "an123",
+     "safeOriginCode":"4813364"
 }
 
 ### GET CURRENT USER
