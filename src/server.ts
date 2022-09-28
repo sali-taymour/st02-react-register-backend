@@ -30,13 +30,14 @@ const app = express();
 const PORT = process.env.PORT || 3049;
 
 app.use(express.json());
-app.use(
-    cors({
-        origin: process.env.FRONTEND_BASE_URL,
-        methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
-        credentials: true,
-    })
-);
+app.use (cors());
+// app.use(
+//     cors({
+//         origin: process.env.FRONTEND_BASE_URL,
+//         methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+//         credentials: true,
+//     })
+// );
 app.set("trust proxy", 1);
 
 app.use(cookieParser());
